@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static ch01.ex06.Uncheck.uncheck;
 
-class UncheckTest {
+public class UncheckTest {
     @Test
     public void test() throws Exception {
         new Thread(uncheck(() -> {
