@@ -1,0 +1,1 @@
+Function<Pair<T>, Pair<Pair<T>>> 的な……．Optional と同じ感じでできるかと思います．
