@@ -84,10 +84,17 @@ public class PropertiesPane extends GridPane {
         btnOK.setOnAction(new EventHandler<ActionEvent>() {
 	          @Override
               public void handle(ActionEvent event) {
-	              dc.setClockFont(new Font(fontsCmb.getValue(), dc.getFontSize()));
+	              Font newFont = new Font(fontsCmb.getValue(), dc.getFontSize());
+	              dc.setClockFont(newFont);
 	              dc.setFontSize(Integer.valueOf(sizesCmb.getValue()));
-	              dc.setFontColor(fontColorCmb.getValue().getValue());
-	              dc.setBackGroundColor(backgroundColorCmb.getValue().getValue());
+	              DisplayColor fontCol = fontColorCmb.getValue();
+	              dc.setFontColor(fontCol.getValue());
+	              DisplayColor backGroundCol = backgroundColorCmb.getValue();
+	              dc.setBackGroundColor(backGroundCol.getValue());
+	              ConfigurationPreferences conf = dc.getConfiguration();
+	              conf.update(dc.getLocation(), dc.getWidth(), dc.getHeight(),
+                        newFont, fontCol,
+                        backGroundCol);
 	              stage.close();
 	          }});
 

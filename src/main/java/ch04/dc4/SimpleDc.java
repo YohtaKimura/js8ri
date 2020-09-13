@@ -3,6 +3,7 @@ package ch04.dc4;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuBar;
@@ -33,7 +34,12 @@ public class SimpleDc extends Application {
     private Scene scene;
     private Color backGroundColor = Color.rgb(255, 255, 255);
     private BorderPane root;
+    private Stage primaryStage;
     private static MenuBar menuBar;
+
+    static ConfigurationPreferences getConfiguration() {
+	    return new ConfigurationPreferences();
+	}
 
     private void updateTime() {
         root.setBackground(new Background(new BackgroundFill(backGroundColor, new CornerRadii(0), Insets.EMPTY)));
@@ -72,6 +78,10 @@ public class SimpleDc extends Application {
         clockFont = font;
     }
 
+    Font getClockFont() {
+        return  this.clockFont;
+    }
+
     void setFontSize(int size) {
         this.clockFont = new Font(clockFont.getName(), size);
     }
@@ -80,16 +90,43 @@ public class SimpleDc extends Application {
         return clockFont.getSize();
     }
 
+    DisplayColor getFontColor() {
+        return DisplayColor.valueOf(this.clockColor);
+    }
+
     void setFontColor(Color color) {
         this.clockColor = color;
+    }
+
+    DisplayColor getBackGroundColor() {
+        return DisplayColor.valueOf(this.backGroundColor);
     }
 
     void setBackGroundColor(Color color) {
         this.backGroundColor = color;
     }
 
+    int getHeight() {
+        return (int)primaryStage.getHeight();
+    }
+
+    int getWidth() {
+        return (int)primaryStage.getWidth();
+    }
+
+    Point2D getLocation() {
+        return new Point2D(primaryStage.getX(), primaryStage.getY());
+    }
+
     @Override
     public void start(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+        ConfigurationPreferences conf = this.getConfiguration();
+        setFontColor(conf.getForeground().getValue());
+        setBackGroundColor(conf.getBackground().getValue());
+        clockFont = new Font(conf.getFontName(), conf.getFontSize());
+
+        setClockFont(clockFont);
         text.setFill(clockColor);
         text.setFont(clockFont);
         root = new BorderPane();
@@ -124,6 +161,12 @@ public class SimpleDc extends Application {
         // don't let thread prevent JVM shutdown
         thread.setDaemon(true);
         thread.start();
+        if (conf.getLocation() != null) {
+            primaryStage.setX(conf.getLocation().getX());
+            primaryStage.setY(conf.getLocation().getY());
+        }
+        primaryStage.setWidth(conf.getWidth());
+        primaryStage.setHeight(conf.getHeight());
 
         primaryStage.setScene(scene);
         primaryStage.show();
