@@ -98,7 +98,6 @@ public class SimpleDc extends Application {
         root.setTop(menuBar);
 
         scene = new Scene(root, 400, 300);
-        scene.setOnMouseClicked(this::mouseClicked);
 
         // longrunning operation runs on different thread
         Thread thread = new Thread(new Runnable() {
@@ -128,13 +127,6 @@ public class SimpleDc extends Application {
 
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
-
-    private void mouseClicked(MouseEvent e ){
-        ContextMenu contextMenu = new PopupMenu(this);
-        if(e.getButton().equals(MouseButton.SECONDARY)) {
-            contextMenu.show(root, e.getScreenX(), e.getScreenY());
-        }
     }
 
     public static void main(String[] args) {
