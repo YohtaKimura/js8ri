@@ -2,9 +2,13 @@ package ch04.dc2;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -22,10 +26,14 @@ public class SimpleDc extends Application {
     private final Text text = new Text();
     private int fontSize = 50;
     private Font clockFont = new Font("SANS_SERIF", fontSize);
-    private Color clockColor = new Color(0, 0, 0, 1.0);
+    private Color clockColor = Color.rgb(0, 0, 0);
+    private Scene scene;
+    private Color backGroundColor = Color.rgb(255, 255, 255);
+    private BorderPane root;
     private static MenuBar menuBar;
 
     private void updateTime() {
+        root.setBackground(new Background(new BackgroundFill(backGroundColor, new CornerRadii(0), Insets.EMPTY)));
         text.setFill(clockColor);
         text.setFont(clockFont);
         text.setText(getTime());
@@ -73,16 +81,20 @@ public class SimpleDc extends Application {
         this.clockColor = color;
     }
 
+    void setBackGroundColor(Color color) {
+        this.backGroundColor = color;
+    }
+
     @Override
     public void start(Stage primaryStage) {
         text.setFill(clockColor);
         text.setFont(clockFont);
-        BorderPane root = new BorderPane();
+        root = new BorderPane();
         root.setCenter(text);
         menuBar = new DcMenuBar(this);
         root.setTop(menuBar);
 
-        Scene scene = new Scene(root, 400, 300);
+        scene = new Scene(root, 400, 300);
 
         // longrunning operation runs on different thread
         Thread thread = new Thread(new Runnable() {

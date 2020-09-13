@@ -5,6 +5,7 @@ import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,10 +29,7 @@ public class DcMenuBar extends MenuBar {
         changeBackgroundColorMenu = new MenuItem("Change background color...");
         changeBackgroundColorMenu.setOnAction(DcMenuBar::menuAction);
         viewMenu.getItems().addAll(changeFontMenu, changeFontSizeMenu, changeBackgroundColorMenu, changeFontColorMenu);
-
-        final Menu menu2 = new Menu("Options");
-        final Menu menu3 = new Menu("Help");
-        getMenus().addAll(viewMenu, menu2, menu3);
+        getMenus().addAll(viewMenu);
     }
 
     public static void menuAction(ActionEvent e) {
@@ -50,13 +48,18 @@ public class DcMenuBar extends MenuBar {
             dc.setFontSize(Integer.valueOf(result.get()));
             System.out.println("FontSize");
         } else if (source.equals(changeFontColorMenu)) {
-            List<Color> colors = Color.;
-            ChoiceDialog<String> dialog = new ChoiceDialog<String>( );
-            Optional<String> result = dialog.showAndWait();
+            List<DisplayColor> colors = (List<DisplayColor>) Arrays.asList(DisplayColor.values());
+            ChoiceDialog<DisplayColor> dialog = new ChoiceDialog<DisplayColor>( colors.get(0), colors );
+            Optional<DisplayColor> result = dialog.showAndWait();
             System.out.println(result.get());
-            dc.setClockFont(new Font(result.get(), dc.getFontSize()));
+            dc.setFontColor(result.get().getValue());
             System.out.println("FontColor");
         } else if (source.equals(changeBackgroundColorMenu)) {
+            List<DisplayColor> colors = (List<DisplayColor>) Arrays.asList(DisplayColor.values());
+            ChoiceDialog<DisplayColor> dialog = new ChoiceDialog<DisplayColor>( colors.get(0), colors );
+            Optional<DisplayColor> result = dialog.showAndWait();
+            System.out.println(result.get());
+            dc.setBackGroundColor(result.get().getValue());
             System.out.println("BackgroundColor");
         }
     }

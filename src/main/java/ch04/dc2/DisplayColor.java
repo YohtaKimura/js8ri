@@ -4,23 +4,23 @@ import javafx.scene.paint.Color;
 
 public enum DisplayColor {
     /* @formatter:off */
-    BLACK(new Color(0, 0, 0,10)),
-    SILVER(new Color(192, 192, 192, 1.0)),
-    GRAY(new Color(128, 128, 128, 1.0)),
-    WHITE(new Color(255, 255, 255, 1.0)),
-    MAROON(new Color(128, 0, 0, 1.0)),
-    RED(new Color(255, 0, 0, 1.0)),
-    PURPLE(new Color(128, 0, 128, 1.0)),
-    FUCHSIA(new Color(255, 0, 255, 1.0)),
-    GREEN(new Color(0, 128, 0, 1.0)),
-    LIME(new Color(0, 255, 0, 1.0)),
-    OLIVE(new Color(128, 128, 0, 1.0)),
-    YELLOW(new Color(255, 255, 0, 1.0)),
-    NAVY(new Color(0, 0, 128, 1.0)),
-    BLUE(new Color(0, 0, 255, 1.0)),
-    TEAL(new Color(0, 128, 128, 1.0)),
-    AQUA(new Color(0, 255, 255, 1.0)),
-    DARKGRAY(new Color(50, 50, 50, 1.0));
+    BLACK(Color.rgb(0, 0, 0)),
+    SILVER(Color.rgb(192, 192, 192)),
+    GRAY(Color.rgb(128, 128, 128)),
+    WHITE(Color.rgb(255, 255, 255)),
+    MAROON(Color.rgb(128, 0, 0)),
+    RED(Color.rgb(255, 0, 0)),
+    PURPLE(Color.rgb(128, 0, 128)),
+    FUCHSIA(Color.rgb(255, 0, 255)),
+    GREEN(Color.rgb(0, 128, 0)),
+    LIME(Color.rgb(0, 255, 0)),
+    OLIVE(Color.rgb(128, 128, 0)),
+    YELLOW(Color.rgb(255, 255, 0)),
+    NAVY(Color.rgb(0, 0, 128)),
+    BLUE(Color.rgb(0, 0, 255)),
+    TEAL(Color.rgb(0, 128, 128)),
+    AQUA(Color.rgb(0, 255, 255)),
+    DARKGRAY(Color.rgb(50, 50, 50));
     /* @formatter:on */
 
     private static final String COLOR_TIP = "\u25a0\u25a0\u25a0";
